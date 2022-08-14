@@ -23,8 +23,7 @@ public class SliderChanger : MonoBehaviour
         _slider.value = _slider.maxValue;
         target = _slider.value;
     }
-
-    // вариант через SmopthDamp
+    
     private void Update()
     {
         target = _player.HealthPoints;
