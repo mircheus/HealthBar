@@ -1132,10 +1132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f1eeb389df247af9686c723b5de6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1717831840}
   _smoothTime: 25
-  _deltaValue: 10
   _currentVelocity: 0
-  _startValue: 68
 --- !u!1 &1405248407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,15 +1400,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320471315}
-        m_TargetAssemblyTypeName: SliderChanger, Assembly-CSharp
-        m_MethodName: Increment
-        m_Mode: 1
+      - m_Target: {fileID: 1717831840}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: IncreaseHealth
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 10
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1500,8 +1499,9 @@ GameObject:
   - component: {fileID: 1717831838}
   - component: {fileID: 1717831837}
   - component: {fileID: 1717831839}
+  - component: {fileID: 1717831840}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1577,7 +1577,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b218e2f2a50674ccc88930b68375d5e4, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -1585,6 +1585,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1717831840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717831834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbe5ddf138d6491f95c968e7560d5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealthPoints: 50
+  _healthPoints: 0
 --- !u!1 &1755553736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,15 +1714,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320471315}
-        m_TargetAssemblyTypeName: SliderChanger, Assembly-CSharp
-        m_MethodName: Decrement
-        m_Mode: 1
+      - m_Target: {fileID: 1717831840}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: DecreaseHealth
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 10
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
