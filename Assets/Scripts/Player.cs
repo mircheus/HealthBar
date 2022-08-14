@@ -6,36 +6,28 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private float _maxHealthPoints = 250;
+    [SerializeField] private float _maxHealthPoints;
     [SerializeField] private float _healthPoints;
 
     private void Start()
     {
         _healthPoints = _maxHealthPoints;
     }
-    
-    public float GetHealthPoints()
+
+    private void Update()
     {
-        return _healthPoints;
+        _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
     }
 
-    public void IncreaseHealth(float value)
+    public float HealthPoints => _healthPoints;
+    
+    public void Heal(float value)
     {
         _healthPoints += value;
-
-        if (_healthPoints > _maxHealthPoints)
-        {
-            _healthPoints = _maxHealthPoints;
-        }
     }
 
-    public void DecreaseHealth(float value)
+    public void Damage(float value)
     {
         _healthPoints -= value;
-
-        if (_healthPoints < 0)
-        {
-            _healthPoints = 0;
-        }
     }
 }
