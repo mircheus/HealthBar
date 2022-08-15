@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     }
 
     public float HealthPoints => _healthPoints;
+    public float MaxHealthPoints => _maxHealthPoints;
     
     public void Heal(float value)
     {
