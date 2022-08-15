@@ -20,20 +20,20 @@ public class SliderChanger : MonoBehaviour
         _slider.value = _player.HealthPoints;
     }
     
+    // public void MoveSlider()
+    // {
+    //     float target = _player.HealthPoints;
+    //
+    //     if (_changer != null)
+    //     {
+    //         StopCoroutine(_changer);
+    //         Debug.Log($"Coroutine stopped");
+    //     }
+    //
+    //     _changer = StartCoroutine(MoveSliderCoroutine(target));
+    // }
+
     public void MoveSlider()
-    {
-        float target = _player.HealthPoints;
-
-        if (_changer != null)
-        {
-            StopCoroutine(_changer);
-            Debug.Log($"Coroutine stopped");
-        }
-
-        _changer = StartCoroutine(MoveSliderCoroutine(target));
-    }
-
-    public void SlideHPviaTweening()
     {
         float target = _player.HealthPoints;
         DOTween.To(() => _slider.value, value => _slider.value = value, target, 0.5f);
