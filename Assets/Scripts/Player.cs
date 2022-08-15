@@ -1,41 +1,33 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-
-    [SerializeField] private float _maxHealthPoints = 250;
+    [SerializeField] private float _maxHealthPoints;
     [SerializeField] private float _healthPoints;
-
-    private void Start()
-    {
-        _healthPoints = _maxHealthPoints;
-    }
+    [SerializeField] private UnityEvent _changed;
     
-    public float GetHealthPoints()
-    {
-        return _healthPoints;
+    private void Update()
+    { 
+        _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
     }
 
-    public void IncreaseHealth(float value)
+    public float HealthPoints => _healthPoints;
+    public float MaxHealthPoints => _maxHealthPoints;
+    
+    public void Heal(float value)
     {
         _healthPoints += value;
-
-        if (_healthPoints > _maxHealthPoints)
-        {
-            _healthPoints = _maxHealthPoints;
-        }
+        _changed.Invoke();
     }
 
-    public void DecreaseHealth(float value)
+    public void Damage(float value)
     {
         _healthPoints -= value;
-
-        if (_healthPoints < 0)
-        {
-            _healthPoints = 0;
-        }
+        _changed.Invoke();
     }
 }

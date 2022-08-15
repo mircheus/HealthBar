@@ -14,20 +14,69 @@ public class SliderChanger : MonoBehaviour
     
     private float _startValue;
     private Slider _slider;
+    // private float _currentValue;
     private float target;
+    private Coroutine _changer;
 
     private void Start()
     {
         _slider = GetComponent<Slider>();
-        _slider.maxValue = _player.GetHealthPoints();
-        _slider.value = _slider.maxValue;
-        target = _slider.value;
+        _slider.value = _player.HealthPoints;
+        _slider.maxValue = _player.MaxHealthPoints;
     }
-    
-    private void Update()
+
+    public void MoveSlider()
     {
-        target = _player.GetHealthPoints();
-        float currentValue = Mathf.SmoothDamp(_slider.value, target, ref _currentVelocity, _smoothTime * Time.deltaTime);
-        _slider.value = currentValue;
+        float target = _player.HealthPoints;
+        DOTween.To(() => _slider.value, value => _slider.value = value, target, 0.5f);
     }
+
+    // Вариант через MoveTowards
+    // private void Update()
+    // {
+    //     _currentValue = Mathf.MoveTowards(_slider.value, target, 0.1f);
+    //     _slider.value = _currentValue;
+    // }
+
+    // public void Increment()
+    // {
+    //     target += _deltaValue;
+    //
+    //     if (target > _slider.maxValue)
+    //     {
+    //         target = _slider.maxValue;
+    //     }
+    // }
+
+    // public void Increment()
+    // {
+    //     
+    // }
+    //
+    //
+    //
+    // public void Decrement()
+    // {
+    //     target -= _deltaValue;
+    //
+    //     if (target < _slider.minValue)
+    //     {
+    //         target = _slider.minValue;
+    //     }
+    // }
+
+    // private void BorderCheck()
+    // {
+    //     if (_currentValue > 100)
+    //     {
+    //         _currentValue = 100;
+    //         _slider.value = 100;
+    //     }
+    //
+    //     if (_currentValue < 0)
+    //     {
+    //         _currentValue = 0;
+    //         _slider.value = 0;
+    //     }
+    // } 
 }

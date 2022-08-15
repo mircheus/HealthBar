@@ -1133,8 +1133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1717831840}
-  _smoothTime: 25
-  _currentVelocity: 0
 --- !u!1 &1405248407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1400,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1717831840}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: IncreaseHealth
+        m_MethodName: Heal
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1577,7 +1575,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b218e2f2a50674ccc88930b68375d5e4, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 2
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -1597,8 +1595,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbe5ddf138d6491f95c968e7560d5ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoints: 50
-  _healthPoints: 0
+  _maxHealthPoints: 100
+  _healthPoints: 50
+  _changed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1320471315}
+        m_TargetAssemblyTypeName: SliderChanger, Assembly-CSharp
+        m_MethodName: MoveSlider
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1755553736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,7 +1729,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1717831840}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: DecreaseHealth
+        m_MethodName: Damage
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
