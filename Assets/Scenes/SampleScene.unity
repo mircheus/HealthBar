@@ -1602,7 +1602,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1320471315}
         m_TargetAssemblyTypeName: SliderChanger, Assembly-CSharp
-        m_MethodName: SlideHP
+        m_MethodName: MoveSlider
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
