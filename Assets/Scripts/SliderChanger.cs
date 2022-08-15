@@ -18,6 +18,7 @@ public class SliderChanger : MonoBehaviour
     {
         _slider = GetComponent<Slider>();
         _slider.value = _player.HealthPoints;
+        _slider.maxValue = _player.MaxHealthPoints;
     }
 
     public void MoveSlider()
