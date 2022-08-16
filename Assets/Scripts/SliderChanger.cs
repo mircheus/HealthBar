@@ -9,6 +9,7 @@ using DG.Tweening;
 public class SliderChanger : MonoBehaviour
 {
     [SerializeField] private Player _player;
+    [SerializeField] private float _slideDuration = 0.5f;
 
     private Slider _slider;
     
@@ -22,6 +23,6 @@ public class SliderChanger : MonoBehaviour
     public void MoveSlider()
     {
         float target = _player.HealthPoints;
-        DOTween.To(() => _slider.value, value => _slider.value = value, target, 0.5f);
+        _slider.DOValue(target, _slideDuration);
     }
 }
