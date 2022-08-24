@@ -5,42 +5,37 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+// 1. _damageButton = GetComponent<Button>(); При использовании GetComponent<>() мы должны гарантировать, что эти компоненты будут на объекте. Для этого используется RequireComponent (_healButton = GetComponent<Button>();) смысла в этих (HealButton, DamageButton) скриптах тут нету. 
+
+// 2. public static event UnityAction<float> Changed; А зачем static. Просто public event нужен. 
+
+// 3. private void OnEnable() { HealButton.Pressed += Heal; DamageButton.Pressed += Damage; } private void OnDisable() { HealButton.Pressed -= Heal; DamageButton.Pressed -= Damage; это соответственно не нужно. А private void Heal() private void Damage() Должны быть публичными, это главное взаимодействие игрока с внешним миром(его бьют или хилят) И Heal() и Damage() должны быть с параметрами величины наносимого им вреда/пользы (Heal(float heal)). 
+
+// 4. В SliderChanger поле [SerializeField] private Player _player; как раз быть должно. У нас SliderChanger жить без Player не может. Соответственно зависимость от Player _player; должна быть. 
+
+// 5. Очень хотел бы увидеть изменение _slider.DOValue(target, _slideDuration); через корунтину (не обязательно (пока что))
 
 public class Player : MonoBehaviour
 {
-    public static event UnityAction<float> Changed;
+    public event UnityAction<int> Changed;
 
-    [SerializeField] private float _maxHealthPoints;
-    [SerializeField] private float _healthPoints;
-    [SerializeField] private int _healPoints;
-    [SerializeField] private int _damagePoints;
-    
-    public float HealthPoints => _healthPoints;
-    public float MaxHealthPoints => _maxHealthPoints;
+    [SerializeField] private int _maxHealthPoints;
+    [SerializeField] private int _currentHealthPoints;
 
-    private void OnEnable()
+    public int CurrentHealthPoints => _currentHealthPoints;
+    public int MaxHealthPoints => _maxHealthPoints;
+
+    public void Heal(int healPoints)
     {
-        HealButton.Pressed += Heal;
-        DamageButton.Pressed += Damage;
+        _currentHealthPoints += healPoints;
+        _currentHealthPoints = Mathf.Clamp(_currentHealthPoints, 0, _maxHealthPoints);
+        Changed?.Invoke(_currentHealthPoints);
     }
 
-    private void OnDisable()
+    public void Damage(int damagePoints)
     {
-        HealButton.Pressed -= Heal;
-        DamageButton.Pressed -= Damage;
-    }
-
-    private void Heal()
-    {
-        _healthPoints += _healPoints;
-        _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
-        Changed?.Invoke(_healthPoints);
-    }
-
-    private void Damage()
-    {
-        _healthPoints -= _damagePoints;
-        _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
-        Changed?.Invoke(_healthPoints);
+        _currentHealthPoints -= damagePoints;
+        _currentHealthPoints = Mathf.Clamp(_currentHealthPoints, 0, _maxHealthPoints);
+        Changed?.Invoke(_currentHealthPoints);
     }
 }

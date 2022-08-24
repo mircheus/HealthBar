@@ -14,26 +14,50 @@ public class SliderChanger : MonoBehaviour
     [SerializeField] private float _slideDuration = 0.5f;
     
     private Slider _slider;
+    private Coroutine _sliderCoroutine;
 
     private void OnEnable()
     {
-        Player.Changed += MoveSlider;
+        _player.Changed += MoveSlider;
     }
 
     private void OnDisable()
     {
-        Player.Changed -= MoveSlider;
+        _player.Changed -= MoveSlider;
     }
 
-    private void Start()
+    private void Awake()
     {
         _slider = GetComponent<Slider>();
-        _slider.value = _player.HealthPoints;
         _slider.maxValue = _player.MaxHealthPoints;
+        _slider.value = _player.CurrentHealthPoints;
     }
 
-    private void MoveSlider(float target)
+    // private void MoveSlider(int target)
+    // {
+    //     _slider.DOValue(target, _slideDuration);
+    // }
+
+    private void MoveSlider(int target)
     {
-        _slider.DOValue(target, _slideDuration);
+        if (_sliderCoroutine != null)
+        {
+            StopCoroutine(_sliderCoroutine);
+        }
+    
+        _sliderCoroutine = StartCoroutine(SliderCoroutine(target));
+    }
+    
+    private IEnumerator SliderCoroutine(int target)
+    {
+        const float seconds = 0.001f;
+        var waitFor = new WaitForSeconds(seconds); 
+        int slideDelta = 1; 
+
+        while (_slider.value != target)
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, target, slideDelta);
+            yield return waitFor;
+        }
     }
 }
