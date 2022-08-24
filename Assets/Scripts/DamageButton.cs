@@ -15,4 +15,9 @@ public class DamageButton : MonoBehaviour
         _damageButton = GetComponent<Button>();
         _damageButton.onClick.AddListener(Pressed);
     }
+    
+    private void OnDisable()
+    {
+        _damageButton.onClick.RemoveListener(Pressed);
+    }
 }
