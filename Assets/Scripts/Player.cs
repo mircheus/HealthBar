@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public static event UnityAction Changed;
+    public static event UnityAction<float> Changed;
 
     [SerializeField] private float _maxHealthPoints;
     [SerializeField] private float _healthPoints;
@@ -34,13 +34,13 @@ public class Player : MonoBehaviour
     {
         _healthPoints += _healPoints;
         _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
-        Changed?.Invoke();
+        Changed?.Invoke(_healthPoints);
     }
 
     private void Damage()
     {
         _healthPoints -= _damagePoints;
         _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
-        Changed?.Invoke();
+        Changed?.Invoke(_healthPoints);
     }
 }

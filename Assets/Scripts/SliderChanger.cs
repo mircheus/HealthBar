@@ -32,9 +32,8 @@ public class SliderChanger : MonoBehaviour
         _slider.maxValue = _player.MaxHealthPoints;
     }
 
-    public void MoveSlider()
+    private void MoveSlider(float target)
     {
-        float target = _player.HealthPoints;
         _slider.DOValue(target, _slideDuration);
     }
 }
