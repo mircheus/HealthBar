@@ -11,8 +11,7 @@ using UnityEngine.Events;
 public class SliderChanger : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private float _slideDuration = 0.5f;
-    
+
     private Slider _slider;
     private Coroutine _sliderCoroutine;
 
@@ -32,11 +31,7 @@ public class SliderChanger : MonoBehaviour
         _slider.maxValue = _player.MaxHealthPoints;
         _slider.value = _player.CurrentHealthPoints;
     }
-
-    // private void MoveSlider(int target)
-    // {
-    //     _slider.DOValue(target, _slideDuration);
-    // }
+    
 
     private void MoveSlider(int target)
     {
