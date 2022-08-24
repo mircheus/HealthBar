@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _healthPoints;
     [SerializeField] private int _healPoints;
     [SerializeField] private int _damagePoints;
-
+    
     public float HealthPoints => _healthPoints;
     public float MaxHealthPoints => _maxHealthPoints;
 
@@ -33,14 +33,14 @@ public class Player : MonoBehaviour
     private void Heal()
     {
         _healthPoints += _healPoints;
-        _healthPoints = _healthPoints > _maxHealthPoints ? _maxHealthPoints : _healthPoints;
+        _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
         Changed?.Invoke();
     }
 
     private void Damage()
     {
         _healthPoints -= _damagePoints;
-        _healthPoints = _healthPoints < 0 ? 0 : _healthPoints;
+        _healthPoints = Mathf.Clamp(_healthPoints, 0, _maxHealthPoints);
         Changed?.Invoke();
     }
 }
